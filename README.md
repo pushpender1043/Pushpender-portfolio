@@ -1,16 +1,75 @@
-# React + Vite
+# ⚡ Pushpender Mishra | Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-Currently, two official plugins are available:
+> A futuristic, fully responsive personal portfolio website featuring neon aesthetics, interactive animations, and a seamless user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Live Demo
+### [👉 Click Here to View Live Site](https://pushpender-portfolio-orpin.vercel.app/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **🎨 Neon & Glassmorphism UI:** Modern dark theme with glowing effects.
+* **🖱️ Custom Interactive Cursor:** A minimal glowing cursor that reacts to hover states.
+* **📱 Fully Responsive:** Optimized for Mobile, Tablet, and Desktop.
+* **🎬 Smooth Animations:** Powered by **Framer Motion** for scroll reveals and transitions.
+* **📧 Working Contact Form:** Integrated with **Getform.io** for real-time emails.
+* **🏎️ Blazing Fast:** Built with **Vite** for high performance.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend:** React.js
+* **Build Tool:** Vite
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion, React-Typewriter-Hook
+* **Icons:** React Icons
+* **Deployment:** Vercel
+
+---
+
+## ⚙️ Installation & Setup
+
+Want to run this locally? Follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/pushpender1043/Pushpender-portfolio.git](https://github.com/pushpender1043/Pushpender-portfolio.git)
+    ```
+
+2.  **Navigate to the project directory:**
+    ```bash
+    cd Pushpender-portfolio
+    ```
+
+3.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+4.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## 📬 Contact Me
+
+* **Name:** Pushpender Mishra
+* **Email:** [mishradeepu400@gmail.com](mailto:mishradeepu400@gmail.com)
+* **GitHub:** [pushpender1043](https://github.com/pushpender1043)
+
+---
+
+<p align="center">
+  Made with ❤️ and 💻 by Pushpender
+</p>
