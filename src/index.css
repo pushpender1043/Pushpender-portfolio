@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-black text-white overflow-x-hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom Selection Color (Jab text select karoge) */
+::selection {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Scrollbar Styling - Minimalist Grey */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 8px; /* Patla Scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #050505; /* Track ka color (Dark Black) */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #444, #666); /* Danda (Grey Gradient) */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #00d8ff, #005bea); /* Hover karne par Blue Glow */
+}
+
+/* --- TEXT SELECTION COLOR (Jadu) --- */
+/* Jab koi text select karega toh wo Blue/Pink dikhega default neele ki jagah */
+::selection {
+  background-color: #00d8ff;
+  color: black;
+}
+/* --- HIDE DEFAULT CURSOR --- */
+@media (min-width: 768px) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Links aur buttons pe bhi cursor gayab rahe */
+a, button, input, textarea, .cursor-pointer {
+  cursor: none !important;
+}
