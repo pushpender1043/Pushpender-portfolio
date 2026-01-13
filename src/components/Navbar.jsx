@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null); // For Sliding Pill Animation
+
+  // 🖱️ Scroll Detection (Navbar ko transparent/solid karne ke liye)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const links = [
     { id: 1, link: "home" },
@@ -15,126 +30,131 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-black/80 backdrop-blur-md fixed nav z-50 border-b border-gray-800">
-      
-      {/* ✨ ANIMATED LOGO */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="ml-2"
-      >
-        <Link to="home" smooth duration={500} className="cursor-pointer group relative">
-           {/* Logo Container */}
-           <div className="flex items-center gap-1 font-heading font-extrabold text-3xl tracking-tighter">
-              
-              {/* 'P' with Cyan Glow */}
-              <motion.span 
-                 whileHover={{ y: -3, textShadow: "0px 0px 8px rgb(34, 211, 238)" }}
-                 className="text-white group-hover:text-cyan-400 transition-colors duration-300"
-              >
-                P
-              </motion.span>
-              
-              {/* Spinning Dot */}
-              <motion.span 
-                 animate={{ rotate: 360 }}
-                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                 className="text-gray-500 text-sm group-hover:text-white"
-              >
-                ✦
-              </motion.span>
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed w-full h-20 z-[999] transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0a0a0a]/90 backdrop-blur-lg border-b border-white/5 shadow-xl"
+          : "bg-transparent border-transparent"
+      }`}
+    >
+      <div className="flex justify-between items-center w-full h-full px-6 max-w-7xl mx-auto">
 
-              {/* 'M' with Purple Glow */}
-              <motion.span 
-                 whileHover={{ y: -3, textShadow: "0px 0px 8px rgb(168, 85, 247)" }}
-                 className="text-white group-hover:text-purple-500 transition-colors duration-300"
-              >
-                M
-              </motion.span>
+        {/* ✨ LOGO (Futuristic & Clean) */}
+        <Link to="home" smooth duration={500} className="cursor-pointer flex items-center gap-2 group">
+           <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
+              <span className="text-xl font-bold text-white font-heading">P</span>
+              {/* Spinning Ring */}
+              <div className="absolute inset-0 border border-white/20 rounded-xl animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity"></div>
            </div>
-           
-           {/* Underline Animation on Hover */}
-           <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:w-full transition-all duration-300 ease-out"></span>
+           <span className="text-xl font-bold text-white tracking-wide group-hover:text-cyan-400 transition-colors duration-300">
+             Mishra<span className="text-cyan-500">.</span>
+           </span>
         </Link>
-      </motion.div>
 
-      {/* 🖥️ DESKTOP MENU */}
-      <ul className="hidden md:flex items-center">
-        {links.map(({ id, link }) => (
-          <li
-            key={id}
-            className="px-6 cursor-pointer capitalize font-medium text-gray-400 hover:text-white relative group"
-          >
-            <Link to={link} smooth duration={500}>
-              {link}
-            </Link>
-            {/* Hover Dot Effect */}
-            <span className="absolute -bottom-2 left-1/2 w-1 h-1 bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transform -translate-x-1/2 transition-all duration-300"></span>
-          </li>
-        ))}
-        
-        {/* Resume Button */}
-        <li className="ml-4">
-           <motion.a 
-             whileHover={{ scale: 1.05 }}
-             whileTap={{ scale: 0.95 }}
-             href="/resume.pdf" 
-             download 
-             className="px-5 py-2 border border-gray-600 rounded-full hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all text-sm font-bold flex items-center gap-2"
-           >
-             Resume
-           </motion.a>
-        </li>
-      </ul>
+        {/* 🖥️ DESKTOP MENU (Sliding Pill Effect) */}
+        <ul className="hidden md:flex items-center gap-2 bg-white/5 px-2 py-1.5 rounded-full border border-white/5 backdrop-blur-sm">
+          {links.map(({ id, link }, index) => (
+            <li
+              key={id}
+              className="relative px-5 py-2 cursor-pointer"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <Link to={link} smooth duration={500} className="relative z-10 text-sm font-medium text-gray-300 hover:text-white transition-colors capitalize">
+                {link}
+              </Link>
 
-      {/* 📱 MOBILE HAMBURGER ICON */}
-      <div
-        onClick={() => setNav(!nav)}
-        className="cursor-pointer pr-4 z-50 text-gray-400 md:hidden hover:text-white transition-colors"
-      >
-        {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
+              {/* ✨ SLIDING BACKGROUND PILL (Ye jadu hai!) */}
+              <AnimatePresence>
+                {hoveredIndex === index && (
+                  <motion.div
+                    layoutId="nav-pill"
+                    className="absolute inset-0 bg-white/10 rounded-full"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </AnimatePresence>
+            </li>
+          ))}
+        </ul>
+
+        {/* 📄 RESUME BUTTON (Shiny Effect) */}
+        <div className="hidden md:block">
+             <a
+               href="/resume.pdf"
+               download
+               className="relative px-6 py-2.5 bg-white text-black font-bold text-sm rounded-full overflow-hidden group flex items-center gap-2 shadow-lg hover:shadow-cyan-500/20 transition-all"
+             >
+               <span className="relative z-10 group-hover:text-cyan-700 transition-colors">Resume</span>
+               {/* Shine Animation */}
+               <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-gray-200 to-transparent group-hover:left-[100%] transition-all duration-500 ease-in-out"></div>
+             </a>
+        </div>
+
+        {/* 📱 MOBILE HAMBURGER */}
+        <div
+          onClick={() => setNav(!nav)}
+          className="cursor-pointer z-50 text-gray-300 md:hidden hover:text-white transition-colors p-2 bg-white/5 rounded-lg border border-white/10"
+        >
+          {nav ? <FaTimes size={20} /> : <FaBars size={20} />}
+        </div>
+
       </div>
 
-      {/* 📱 MOBILE MENU */}
+      {/* 📱 MOBILE MENU OVERLAY (Smooth Slide) */}
       <AnimatePresence>
         {nav && (
-          <motion.ul
+          <motion.div
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-xl text-gray-400 md:hidden z-40"
+            transition={{ type: "tween", duration: 0.3 }}
+            className="fixed top-0 right-0 w-full h-screen bg-[#0a0a0a] z-40 flex flex-col items-center justify-center space-y-8"
           >
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none" 
+              style={{ backgroundImage: 'radial-gradient(#333 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+            </div>
+
             {links.map(({ id, link }) => (
-              <li
-                key={id}
-                className="px-4 cursor-pointer capitalize py-6 text-3xl font-light hover:text-white hover:scale-110 transition-transform duration-200"
+              <motion.div
+                 key={id}
+                 initial={{ opacity: 0, x: 50 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 transition={{ delay: id * 0.1 }}
               >
                 <Link
                   onClick={() => setNav(false)}
                   to={link}
                   smooth
                   duration={500}
+                  className="text-4xl font-light text-gray-400 capitalize hover:text-white hover:scale-110 transition-all cursor-pointer block"
                 >
                   {link}
                 </Link>
-              </li>
+              </motion.div>
             ))}
             
-            <li className="mt-8">
-               <a 
-                 href="/resume.pdf" 
-                 download 
-                 className="px-8 py-4 border border-gray-500 rounded-lg text-xl font-bold text-white hover:bg-white hover:text-black transition-all"
-               >
-                 Download Resume
-               </a>
-            </li>
-          </motion.ul>
+            <motion.a
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              href="/resume.pdf"
+              download
+              className="px-8 py-3 bg-white text-black font-bold rounded-full text-lg mt-8 hover:bg-cyan-400 transition-colors shadow-xl"
+            >
+               Download Resume
+            </motion.a>
+          </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.nav>
   );
 };
 

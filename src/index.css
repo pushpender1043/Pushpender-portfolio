@@ -6,65 +6,54 @@
 
 html {
   scroll-behavior: smooth;
+  /* ⚠️ Yahan 'overflow-x: hidden' mat lagana */
 }
 
 body {
-  @apply bg-black text-white overflow-x-hidden;
+  @apply bg-[#050816] text-white; /* overflow-x-hidden hataya */
   font-family: 'Inter', sans-serif;
 }
 
-/* Custom Selection Color (Jab text select karoge) */
-::selection {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-/* Scrollbar Styling - Minimalist Grey */
+/* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333333;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555555;
-}
-/* --- CUSTOM SCROLLBAR --- */
-::-webkit-scrollbar {
-  width: 8px; /* Patla Scrollbar */
-}
-
-::-webkit-scrollbar-track {
-  background: #050505; /* Track ka color (Dark Black) */
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #444, #666); /* Danda (Grey Gradient) */
+  background: linear-gradient(to bottom, #444, #666);
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #00d8ff, #005bea); /* Hover karne par Blue Glow */
+  background: linear-gradient(to bottom, #00d8ff, #005bea);
 }
 
-/* --- TEXT SELECTION COLOR (Jadu) --- */
-/* Jab koi text select karega toh wo Blue/Pink dikhega default neele ki jagah */
 ::selection {
   background-color: #00d8ff;
   color: black;
 }
-/* --- HIDE DEFAULT CURSOR --- */
+
+/* Custom Cursor Hide */
 @media (min-width: 768px) {
   * {
     cursor: none !important;
   }
 }
-
-/* Links aur buttons pe bhi cursor gayab rahe */
 a, button, input, textarea, .cursor-pointer {
   cursor: none !important;
+}
+
+/* 3D Skills Cloud */
+.tagcloud {
+  display: inline-block;
+  color: #00d8ff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.tagcloud--item:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #00d8ff, 0 0 20px #00d8ff;
+  cursor: pointer;
 }

@@ -1,172 +1,163 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaCode } from 'react-icons/fa';
+import React, { useRef } from "react";
+import { motion, useTransform, useScroll } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const Projects = () => {
-  
-  const featuredProjects = [
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  // Projects Data
+  const projects = [
     {
       id: 1,
       title: "Shynex",
       category: "Fashion Store",
-      desc: "Premium D2C platform with Admin Dashboard & Inventory Mgmt.",
-      tech: ["React", "Node", "Redux", "Firebase"],
-      demo: "https://shynex-6ejo.vercel.app/", // ✅ REAL LINK ADDED
-      code: "#", 
+      desc: "A premium D2C fashion platform featuring a comprehensive Admin Dashboard and real-time Inventory Management system.",
+      tech: ["React", "Node.js", "Redux", "Firebase"],
+      demo: "https://shynex-6ejo.vercel.app/",
+      code: "#",
       image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop",
-      glowColor: "group-hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]", 
-      borderColor: "group-hover:border-purple-500/50"
     },
     {
       id: 2,
       title: "Chit Chat",
-      category: "Live Messaging",
-      desc: "Real-time chat app with <50ms latency using WebSockets.",
-      tech: ["MERN", "Socket.io", "JWT", "Tailwind"],
-      demo: "https://chit-chat-nine-omega.vercel.app/chats", // ✅ REAL LINK ADDED
+      category: "Real-time Messaging",
+      desc: "A high-performance chat application offering <50ms latency using WebSockets, JWT authentication, and encrypted rooms.",
+      tech: ["MERN Stack", "Socket.io", "Tailwind", "JWT"],
+      demo: "https://chit-chat-nine-omega.vercel.app/chats",
       code: "#",
       image: "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?q=80&w=1974&auto=format&fit=crop",
-      glowColor: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]", 
-      borderColor: "group-hover:border-cyan-500/50"
     },
     {
       id: 3,
       title: "Food Fusion",
-      category: "Campus Cafe",
-      desc: "Smart food ordering system to reduce queue times.",
-      tech: ["Next.js", "MongoDB", "Vercel"],
-      demo: "https://food-fusion-campus-hub.vercel.app", // ✅ REAL LINK ADDED
+      category: "Smart Campus Cafe",
+      desc: "An intelligent food ordering system designed to reduce queue times in campus cafeterias with live order tracking.",
+      tech: ["Next.js", "MongoDB", "Vercel", "Stripe"],
+      demo: "https://food-fusion-campus-hub.vercel.app",
       code: "#",
       image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop",
-      glowColor: "group-hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]", 
-      borderColor: "group-hover:border-orange-500/50"
     },
     {
       id: 4,
       title: "S.A.K.H.I",
-      category: "AI Assistant",
-      desc: "Voice-activated desktop automation using NLP.",
-      tech: ["Python", "NLP", "SpeechRec"],
-      demo: "#", // ⚠️ Ye abhi bhi nakli hai
+      category: "AI Voice Assistant",
+      desc: "A desktop automation tool powered by NLP that performs tasks via voice commands, mimicking human interaction.",
+      tech: ["Python", "NLP", "PyTorch", "Automation"],
+      demo: "#",
       code: "#",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop",
-      glowColor: "group-hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]", 
-      borderColor: "group-hover:border-green-500/50"
-    }
+    },
+    {
+      id: 5,
+      title: "Dhun Music",
+      category: "Media Player",
+      desc: "A futuristic music player with AI-based song recommendations and immersive audio visualizations.",
+      tech: ["React", "Spotify API", "Framer Motion"],
+      demo: "https://dhunn-ai-harmony-beats.vercel.app/",
+      code: "#",
+      image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop",
+    },
   ];
 
-  const otherProjects = [
-    { id: 5, title: "Dhun Music", type: "Media Player", link: "https://dhunn-ai-harmony-beats.vercel.app/", glowColor: "from-pink-500 via-red-500 to-yellow-500" },
-    { id: 6, title: "AI Image Enhancer", type: "AI Tool", link: "https://ai-enhancer-rose.vercel.app/", glowColor: "from-blue-400 via-indigo-500 to-purple-500" },
-    { id: 7, title: "Pro Weather", type: "Utility App", link: "https://weather-app-pro-one.vercel.app/", glowColor: "from-yellow-400 via-orange-500 to-red-500" },
-    { id: 8, title: "Tic Tac Toe", type: "Game Logic", link: "https://tic-tac-toe-blush-two-90.vercel.app/", glowColor: "from-green-400 via-emerald-500 to-teal-500" }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.2 } }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
-  };
+  // Animation Logic: Vertical scroll ko Horizontal movement me badalna
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
 
   return (
-    <div name="projects" className="w-full min-h-screen bg-black text-white py-24 relative overflow-hidden">
+    <div name="projects" className="bg-transparent relative z-0">
       
-      {/* Background Glow & Texture */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-pink-900/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-900/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
-
-      <div className="max-w-screen-xl p-4 mx-auto flex flex-col justify-center w-full h-full relative z-10">
+      {/* Scrollable Track (Height badhayi taaki scroll smooth ho) */}
+      <section ref={targetRef} className="relative h-[300vh] bg-transparent">
         
-        <div className="pb-16 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-heading font-bold inline-block border-b-4 border-gray-700 pb-2"
-          >
-            Featured <span className="text-gray-500">Work</span>
-          </motion.h2>
+        {/* Sticky Container - Ye screen par chipak jayega */}
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+          
+          {/* Background Text */}
+          <div className="absolute top-20 left-10 z-0">
+             <h2 className="text-[12rem] font-bold text-white opacity-[0.03] uppercase leading-none pointer-events-none">
+               Work
+             </h2>
+          </div>
+
+          {/* Moving Horizontal Track */}
+          <motion.div style={{ x }} className="flex gap-16 px-12 md:px-24 items-center relative z-10">
+            
+            {/* Intro Card */}
+            <div className="flex flex-col justify-center min-w-[300px] md:min-w-[400px]">
+                <h2 className="text-4xl md:text-7xl font-bold text-white leading-tight">
+                    Featured <br /> <span className="text-cyan-400">Projects</span>
+                </h2>
+                <p className="mt-6 text-gray-400 max-w-sm text-lg">
+                    A collection of technical endeavors, ranging from Full Stack Web Apps to AI Automation tools.
+                </p>
+                <div className="mt-8 flex items-center gap-2 text-cyan-400 animate-pulse">
+                    <span>Scroll Down</span> 
+                    <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </div>
+            </div>
+
+            {/* Project Cards Loop */}
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+            
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* End Spacer */}
+      <div className="h-[20vh] bg-transparent"></div>
+    </div>
+  );
+};
+
+// --- Project Card Design ---
+const ProjectCard = ({ project }) => {
+  return (
+    <div className="group relative h-[450px] w-[350px] md:h-[500px] md:w-[800px] flex-shrink-0 overflow-hidden rounded-3xl bg-gray-900/60 border border-white/10 backdrop-blur-xl flex flex-col md:flex-row transition-all hover:border-cyan-500/50 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)]">
+      
+      {/* Image Section */}
+      <div className="h-1/2 md:h-full md:w-3/5 overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10 md:bg-gradient-to-r" />
+        <img
+          src={project.image}
+          alt={project.title}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute top-4 left-4 z-20">
+            <span className="px-4 py-1.5 text-xs font-bold tracking-widest text-black bg-cyan-400 rounded-full uppercase shadow-lg shadow-cyan-400/20">
+                {project.category}
+            </span>
+        </div>
+      </div>
+
+      {/* Info Section */}
+      <div className="h-1/2 md:h-full md:w-2/5 p-6 md:p-10 flex flex-col justify-center relative">
+        <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6 line-clamp-4">
+          {project.desc}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-8">
+          {project.tech.map((tech, index) => (
+            <span key={index} className="text-xs text-cyan-200 bg-cyan-900/20 border border-cyan-800/30 px-2 py-1 rounded">
+              #{tech}
+            </span>
+          ))}
         </div>
 
-        {/* Featured Projects Grid (3D Hover) */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid md:grid-cols-2 gap-10 sm:px-4"
-        >
-          {featuredProjects.map((project) => (
-            <motion.div 
-              key={project.id}
-              variants={cardVariants}
-              className={`group relative rounded-2xl bg-gray-900/40 backdrop-blur-sm border border-gray-800 overflow-hidden transition-all duration-500 hover:-translate-y-2 ${project.glowColor} ${project.borderColor}`}
-            >
-              <div className="relative h-64 overflow-hidden">
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                   <p className="text-[10px] font-bold text-white uppercase tracking-widest">{project.category}</p>
-                </div>
-              </div>
-              <div className="p-6 relative">
-                 <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-2xl font-heading font-bold text-white group-hover:text-cyan-400 transition-colors">{project.title}</h3>
-                    <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-4 group-hover:translate-x-0">
-                       <a href={project.code} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white"><FaGithub size={20} /></a>
-                       <a href={project.demo} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white"><FaExternalLinkAlt size={18} /></a>
-                    </div>
-                 </div>
-                 <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">{project.desc}</p>
-                 <div className="flex flex-wrap gap-2 mb-6">
-                   {project.tech.map((t, i) => (
-                     <span key={i} className="text-xs font-medium bg-black/50 text-gray-300 px-3 py-1 rounded-full border border-gray-700 group-hover:border-gray-500 transition-colors">{t}</span>
-                   ))}
-                 </div>
-                 <a href={project.demo} target="_blank" rel="noreferrer" className="block w-full py-3 text-center bg-white/5 border border-white/10 rounded-lg text-sm font-bold text-gray-300 hover:bg-white hover:text-black transition-all duration-300">View Project Details</a>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* 🌟 OTHER PROJECTS */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="mt-20 pt-10 border-t border-gray-900"
-        >
-           <h3 className="text-2xl font-bold mb-8 text-center text-gray-300">Other Creative Projects</h3>
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
-             {otherProjects.map((item) => (
-               <motion.a 
-                 key={item.id}
-                 href={item.link}
-                 target="_blank"
-                 rel="noreferrer"
-                 className="group relative bg-gray-900/30 border border-gray-800 p-6 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between h-40"
-               >
-                 {/* 🔥 GLOW DIV */}
-                 <div className={`absolute inset-0 bg-gradient-to-r ${item.glowColor} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}></div>
-
-                 <div className="relative z-10 flex justify-between items-start">
-                    <FaCode size={24} className="text-gray-500 group-hover:text-white transition-colors" />
-                    <FaExternalLinkAlt size={14} className="text-gray-600 group-hover:text-white transition-colors" />
-                 </div>
-                 <div className="relative z-10">
-                   <h4 className="font-bold text-lg text-gray-300 group-hover:text-white transition-colors">{item.title}</h4>
-                   <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors mt-1">{item.type}</p>
-                 </div>
-               </motion.a>
-             ))}
-           </div>
-        </motion.div>
-
+        <div className="flex gap-4 mt-auto">
+          <a href={project.demo} target="_blank" rel="noreferrer" className="flex-1 py-3 bg-white text-black font-bold rounded-lg text-center hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2">
+            Live Demo <FaExternalLinkAlt size={12} />
+          </a>
+          <a href={project.code} target="_blank" rel="noreferrer" className="flex-1 py-3 border border-gray-600 text-white rounded-lg text-center hover:border-white hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+            Code <FaGithub size={16} />
+          </a>
+        </div>
       </div>
     </div>
   );

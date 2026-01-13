@@ -1,145 +1,139 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPaperPlane, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaPaperPlane, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
   return (
-    <div name="contact" className="w-full min-h-screen bg-black text-white py-24 relative overflow-hidden flex flex-col justify-center">
+    <div name="contact" className="w-full min-h-screen bg-transparent py-24 relative flex flex-col justify-center items-center">
       
-      {/* 🌑 Background - Subtle Grey Glow */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-gray-800/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-gray-800/10 rounded-full blur-[120px] pointer-events-none"></div>
-      
-      {/* Minimal Grid */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#444 1px, transparent 1px), linear-gradient(90deg, #444 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+      {/* Background: Minimal Grid Pattern */}
+      <div className="absolute inset-0 z-0 opacity-20" 
+           style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
       </div>
 
-      <div className="max-w-screen-xl mx-auto p-4 flex flex-col justify-center w-full h-full relative z-10">
+      <div className="max-w-6xl mx-auto px-6 w-full relative z-10">
         
-        {/* HEADING */}
-        <div className="pb-16 text-center">
-          <motion.h2 
-             initial={{ opacity: 0, y: -20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6 }}
-             className="text-4xl md:text-5xl font-heading font-bold inline-block border-b-4 border-gray-700 pb-2"
+        {/* HEADER */}
+        <div className="text-center mb-16">
+          <motion.p 
+             initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} 
+             className="text-cyan-500 text-sm font-bold tracking-[0.2em] uppercase mb-3"
           >
-            Get In <span className="text-gray-500">Touch</span>
+             Contact
+          </motion.p>
+          <motion.h2 
+             initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+             className="text-4xl md:text-5xl font-bold text-white"
+          >
+            Let's Work Together
           </motion.h2>
-          <p className="py-6 text-gray-400">Let's start a conversation</p>
+          <p className="mt-4 text-gray-400 max-w-lg mx-auto">
+            I am currently open for full-time opportunities and freelance projects.
+          </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-12 justify-center items-start">
+        <div className="flex flex-col lg:flex-row gap-10">
           
-          {/* 🪪 LEFT: MINIMAL INFO CARD */}
+          {/* LEFT: INFO CARD */}
           <motion.div 
-             initial={{ opacity: 0, x: -50 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             transition={{ duration: 0.8 }}
-             className="w-full md:w-1/3"
+             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}
+             className="w-full lg:w-2/5"
           >
-            <div className="bg-[#0a0a0a] border border-gray-800 p-8 rounded-2xl shadow-xl">
+            <div className="bg-[#09090b] border border-white/10 rounded-2xl p-8 h-full shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
+              <h3 className="text-2xl font-bold text-white mb-2">Contact Details</h3>
+              <p className="text-gray-400 text-sm mb-8">Feel free to reach out directly.</p>
               
-              <h3 className="text-2xl font-bold text-white mb-4">Contact Info</h3>
-              <p className="text-gray-400 mb-8 leading-relaxed text-sm">
-                Open for opportunities. Let's build something amazing together.
-              </p>
-              
-              <div className="flex flex-col gap-8">
-                {/* Email */}
-                <a href="mailto:mishradeepu400@gmail.com" className="flex items-center gap-4 group cursor-pointer">
-                  <div className="p-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-300 group-hover:text-white group-hover:border-white transition-all duration-300">
-                    <FaEnvelope size={20} />
+              <div className="space-y-6">
+                <ContactItem icon={<FaEnvelope size={20}/>} label="Email" value="mishradeepu400@gmail.com" link="mailto:mishradeepu400@gmail.com" color="text-cyan-400" />
+                <ContactItem icon={<FaMapMarkerAlt size={20}/>} label="Location" value="Haryana, India" color="text-purple-400" />
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-green-400 shrink-0">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">Mail Me</p>
-                    <p className="text-base font-medium text-gray-300 group-hover:text-white transition-colors">mishradeepu400@gmail.com</p>
+                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Status</p>
+                    <p className="text-green-400 font-medium text-lg">Available for Work</p>
                   </div>
-                </a>
-
-                {/* Location */}
-                <div className="flex items-center gap-4 group">
-                  <div className="p-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-300 group-hover:text-white group-hover:border-white transition-all duration-300">
-                    <FaMapMarkerAlt size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">Location</p>
-                    <p className="text-base font-medium text-gray-300 group-hover:text-white transition-colors">Haryana, India</p>
-                  </div>
-                </div>
-
-                {/* Socials */}
-                <div className="flex gap-4 mt-2">
-                  <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex-1 py-3 bg-gray-900 border border-gray-800 rounded-lg flex justify-center items-center text-gray-400 hover:text-white hover:border-white transition-all duration-300">
-                    <FaLinkedin size={22} />
-                  </a>
-                  <a href="https://github.com" target="_blank" rel="noreferrer" className="flex-1 py-3 bg-gray-900 border border-gray-800 rounded-lg flex justify-center items-center text-gray-400 hover:text-white hover:border-white transition-all duration-300">
-                    <FaGithub size={22} />
-                  </a>
                 </div>
               </div>
 
+              <div className="mt-12 pt-8 border-t border-white/5">
+                 <p className="text-gray-400 text-sm mb-4">Connect on Socials</p>
+                 <div className="flex gap-4">
+                    <SocialBtn icon={<FaGithub />} link="https://github.com/pushpender1043" />
+                    <SocialBtn icon={<FaLinkedin />} link="https://linkedin.com" />
+                    <SocialBtn icon={<FaTwitter />} link="#" />
+                 </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* 📝 RIGHT: REAL WORKING FORM */}
+          {/* RIGHT: FORM */}
           <motion.div 
-             initial={{ opacity: 0, x: 50 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             transition={{ duration: 0.8 }}
-             className="w-full md:w-1/2"
+             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}
+             className="w-full lg:w-3/5"
           >
-            {/* ✅ ACTION LINK ADDED HERE */}
-            <form action="https://getform.io/f/bdrknknb" method="POST" className="flex flex-col gap-6 bg-[#0a0a0a] p-8 rounded-2xl border border-gray-800 shadow-xl">
-              
-              <div className="flex flex-col gap-2">
-                <label className="text-sm text-gray-500 font-medium ml-1">Name</label>
-                <input 
-                  type="text" name="name" required
-                  className="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gray-500 focus:bg-gray-900 transition-all placeholder-gray-700"
-                  placeholder="John Doe"
-                />
+            <form action="https://getform.io/f/bdrknknb" method="POST" className="bg-[#09090b] border border-white/10 rounded-2xl p-8 lg:p-10 shadow-2xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <InputGroup label="Your Name" type="text" name="name" placeholder="John Doe" />
+                <InputGroup label="Email Address" type="email" name="email" placeholder="john@company.com" />
               </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm text-gray-500 font-medium ml-1">Email</label>
-                <input 
-                  type="email" name="email" required
-                  className="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gray-500 focus:bg-gray-900 transition-all placeholder-gray-700"
-                  placeholder="john@example.com"
-                />
+              <div className="flex flex-col gap-2 mb-8">
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Your Message</label>
+                <textarea name="message" rows="5" required placeholder="Tell me about your project..." className="w-full bg-[#121214] border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-cyan-500 focus:bg-[#1a1a1c] transition-all resize-none placeholder-gray-600"></textarea>
               </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm text-gray-500 font-medium ml-1">Message</label>
-                <textarea 
-                  name="message" rows="4" required
-                  className="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gray-500 focus:bg-gray-900 transition-all resize-none placeholder-gray-700"
-                  placeholder="Tell me about your project..."
-                ></textarea>
-              </div>
-
-              <button className="group w-full py-4 bg-white text-black rounded-lg font-bold text-lg mt-2 hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
-                Send Message 
-                <FaPaperPlane className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" size={14} />
+              <button className="w-full py-4 bg-white text-black font-bold rounded-lg hover:bg-cyan-50 transition-colors flex items-center justify-center gap-2 group shadow-lg shadow-white/5">
+                Send Message <FaPaperPlane className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 text-cyan-600" size={14} />
               </button>
-
             </form>
           </motion.div>
-
         </div>
         
-        {/* FOOTER */}
-        <div className="mt-20 text-center border-t border-gray-900 pt-8">
-           <p className="text-gray-600 text-sm">
-             Designed & Built by <span className="text-gray-400 font-bold">Pushpender Mishra</span>
+        {/* ================= NEW FOOTER (Made in India) ================= */}
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+           
+           <p className="text-gray-500 text-sm font-medium">
+             © 2025 Pushpender Mishra. All rights reserved.
            </p>
+
+           {/* 🇮🇳 The Classy 'Made in India' Text */}
+           <div className="flex items-center gap-2 text-sm text-gray-400 bg-white/5 px-4 py-2 rounded-full border border-white/5 hover:border-white/10 transition-all cursor-default">
+              <span>Made with</span>
+              <span className="text-red-500 animate-pulse">❤️</span>
+              <span>in</span>
+              <span className="font-bold bg-gradient-to-r from-orange-500 via-white to-green-500 bg-clip-text text-transparent">
+                India
+              </span>
+           </div>
+
         </div>
 
       </div>
     </div>
   );
 };
+
+// Helper Components to keep code clean
+const ContactItem = ({ icon, label, value, link, color }) => (
+  <div className="flex items-start gap-4">
+    <div className={`w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center ${color} shrink-0`}>{icon}</div>
+    <div>
+      <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">{label}</p>
+      {link ? <a href={link} className="text-white font-medium hover:text-cyan-400 transition-colors text-lg">{value}</a> : <p className="text-white font-medium text-lg">{value}</p>}
+    </div>
+  </div>
+);
+
+const InputGroup = ({ label, type, name, placeholder }) => (
+  <div className="flex flex-col gap-2">
+    <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">{label}</label>
+    <input type={type} name={name} required placeholder={placeholder} className="w-full bg-[#121214] border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-cyan-500 focus:bg-[#1a1a1c] transition-all placeholder-gray-600" />
+  </div>
+);
+
+const SocialBtn = ({ icon, link }) => (
+  <a href={link} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black hover:scale-110 transition-all duration-300">{icon}</a>
+);
 
 export default Contact;
